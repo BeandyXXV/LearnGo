@@ -30,10 +30,23 @@ func Var_learn() {
 	// 定义变量，同时显式初始化。
 	// 不能提供数据类型。
 	// 只能用在函数内部。
+	// 使用时左侧的变量必须是未被声明的。
 	eighthVar := "hello"
 	ninthVar, tenthVar := "hello", "world" // 简短声明多个变量，并赋值
 
+	// 编译器根据右值自动推断变量类型
+	var attack = 40                // 右值为整形，编译器自动推断为int类型
+	var defense = 20               // 右值为整形，编译器自动推断为int类型
+	var damage_rate float32 = 0.17 // 如果不指定精度，编译器会默认使用最高精度（float64），当不许需要高精度时，可以指定较低精度节省空间。
+	var damage = float32(attack-defense) * damage_rate
+
+	// 多个短变量声明中，要求至少一个新声明的变量出现在左值中，此时编译器不会报错，重复声明的变量最终会采用最后赋的值。
+	conn, err := 1, 2
+	conn1, err := 2, 3
+
 	// 打印上述变量的值
 	println(firstVar, secondVar, thirdVar, fourthVar, fifthVar, sixthVar,
-		seventhVar.name, seventhVar.age, eighthVar, ninthVar, tenthVar)
+		seventhVar.name, seventhVar.age, eighthVar, ninthVar, tenthVar, '\n')
+	println(damage, '\n')
+	println(conn, err, conn1)
 }
